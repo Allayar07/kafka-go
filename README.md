@@ -17,13 +17,11 @@ docker exec kafka_local bash -c '/opt/bitnami/kafka/bin/kafka-topics.sh --create
 * Second topic:
 ```
 docker exec kafka_local bash -c '/opt/bitnami/kafka/bin/kafka-topics.sh --create --topic topic_2 --bootstrap-server localhost:9092
-
 ```
 # Step-4
 ## Write something to topic_1:
 ```
 docker exec kafka_local bash
-
 ```
 And then : ```cd /opt/bitnami/kafka/bin```
 
@@ -37,7 +35,6 @@ write something and press enter
 ## See messages from topic_2:
 ```
 docker exec kafka_local bash
-
 ```
 And then : ```cd /opt/bitnami/kafka/bin```
 
