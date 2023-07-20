@@ -14,6 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	// SetReadDeadline is need because if something went wrong in send error message for me:)
 	if err = kafkaConn.SetReadDeadline(time.Now().Add(time.Second * 10)); err != nil {
 		log.Fatalln(err)
 	}
