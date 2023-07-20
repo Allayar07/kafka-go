@@ -1,7 +1,7 @@
 # Step-1
 ## clone the repo: 
 ```
-git clone 
+git clone git@github.com:Allayar07/kafka-go.git
 ```
 # Step-2
 ## Up the docker containers"
