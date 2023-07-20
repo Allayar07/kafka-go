@@ -50,3 +50,5 @@ kafka-console-consumer.sh --topic topic_2 --from-beginning --bootstrap-server lo
 ```
 
 * Or you can get it from here: ```go run consumer/consume.go```
+
+Documentation of library : https://github.com/segmentio/kafka-go
