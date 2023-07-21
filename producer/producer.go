@@ -26,12 +26,12 @@ func (k *KafkaReader) FetchMessage(ctx context.Context, messages chan kafka.Mess
 	for {
 		msg, err := k.reader.FetchMessage(ctx)
 		if err != nil {
-			return err
+			return errors.New(err.Error())
 		}
 		select {
 		// check context is not expired, if it expired then return error
 		case <-ctx.Done():
-			return ctx.Err()
+			return errors.New(ctx.Err().Error())
 		// if context is not expired then send message to messages channel
 		case messages <- msg:
 			log.Println("successfully fetched message: ", string(msg.Value))
@@ -43,10 +43,10 @@ func (k *KafkaReader) CommitMessage(ctx context.Context, commitMessages <-chan k
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return errors.New(ctx.Err().Error())
 		case msg := <-commitMessages:
 			if err := k.reader.CommitMessages(ctx, msg); err != nil {
-				return errors.Wrap(err, "Reader.CommitMessages")
+				return errors.New(err.Error())
 			}
 			log.Printf("committed successfully message: %s ", string(msg.Value))
 		}

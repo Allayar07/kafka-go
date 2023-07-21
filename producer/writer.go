@@ -2,6 +2,7 @@ package producer
 
 import (
 	"context"
+	"github.com/pkg/errors"
 	"github.com/segmentio/kafka-go"
 )
 
@@ -21,14 +22,14 @@ func (k *KafkaWriter) WriteMessageToOtherTopic(ctx context.Context, messages cha
 	for {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return errors.New(ctx.Err().Error())
 		case msg := <-messages:
 			if err := k.writer.WriteMessages(ctx, kafka.Message{Value: msg.Value}); err != nil {
-				return err
+				return errors.New(err.Error())
 			}
 			select {
 			case <-ctx.Done():
-				return ctx.Err()
+				return errors.New(ctx.Err().Error())
 			case committedMessages <- msg:
 			}
 		}
